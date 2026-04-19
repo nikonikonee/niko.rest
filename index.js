@@ -2,7 +2,8 @@ const songs = [
     { file: 'assets/Aotl.mp4', name: 'All of the Lights ~ Kanye West', cover: 'assets/Aotl.jpg' },
     { file: 'assets/GoodLife.mp4', name: 'Good Life ~ Kanye West', cover: 'assets/GoodLife.jpg' },
     { file: 'assets/Homecoming.mp4', name: 'Homecoming ~ Kanye West', cover: 'assets/Homecoming.jpg' },
-    { file: 'assets/FlashingLights.mp4', name: 'Flashing Lights ~ Kanye West', cover: 'assets/FlashingLights.jpg' }
+    { file: 'assets/FlashingLights.mp4', name: 'Flashing Lights ~ Kanye West', cover: 'assets/FlashingLights.jpg' },
+    { file: 'assets/TouchTheSky.mp4', name: 'Touch the Sky ~ Kanye West', cover: 'assets/TouchTheSky.jpg' }
 ];
 
 let queue = shuffle(songs);
