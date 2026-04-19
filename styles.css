@@ -9,7 +9,22 @@ body {
     cursor: pointer;
     font-family: 'Space Grotesk', sans-serif;
     overflow: hidden;
-    transition: background-color 1s ease;
+}
+
+#bg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    pointer-events: none;
+}
+
+body.entered #bg {
+    opacity: 1;
 }
 
 #enter {

@@ -1,13 +1,21 @@
 const songs = [
-    { file: 'assets/Aotl.mp3', name: 'All of the Lights', cover: 'assets/Aotl.jpg' },
-    { file: 'assets/GoodLife.mp3', name: 'Good Life', cover: 'assets/GoodLife.jpg' },
-    { file: 'assets/Homecoming.mp3', name: 'Homecoming', cover: 'assets/Homecoming.jpg' },
-    { file: 'assets/FlashingLights.mp3', name: 'Flashing Lights', cover: 'assets/FlashingLights.jpg' }
+    { file: 'assets/Aotl.mp4', name: 'All of the Lights ~ Kanye West', cover: 'assets/Aotl.jpg' },
+    { file: 'assets/GoodLife.mp4', name: 'Good Life ~ Kanye West', cover: 'assets/GoodLife.jpg' },
+    { file: 'assets/Homecoming.mp4', name: 'Homecoming ~ Kanye West', cover: 'assets/Homecoming.jpg' },
+    { file: 'assets/FlashingLights.mp4', name: 'Flashing Lights ~ Kanye West', cover: 'assets/FlashingLights.jpg' }
 ];
 
-let queue = [];
+let queue = shuffle(songs);
 let history = [];
-let audio = null;
+const video = document.getElementById('bg');
+video.volume = 0.3;
+video.addEventListener('ended', onEnded);
+
+const firstSong = queue[0];
+video.src = firstSong.file;
+video.load();
+document.getElementById('title').textContent = firstSong.name;
+document.getElementById('coverImg').src = firstSong.cover;
 
 function shuffle(arr) {
     const a = arr.slice();
@@ -19,14 +27,10 @@ function shuffle(arr) {
 }
 
 function playSong(song) {
-    if (audio) {
-        audio.pause();
-        audio.removeEventListener('ended', onEnded);
+    if (!video.src.endsWith(song.file)) {
+        video.src = song.file;
     }
-    audio = new Audio(song.file);
-    audio.volume = 0.3;
-    audio.addEventListener('ended', onEnded);
-    audio.play();
+    video.play();
     document.getElementById('title').textContent = song.name;
     document.getElementById('coverImg').src = song.cover;
     setPauseIcon(false);
@@ -90,7 +94,7 @@ async function typeLoop() {
 document.body.addEventListener('click', (e) => {
     if (e.target.closest('#stack')) return;
     document.getElementById('enter').style.display = 'none';
-    document.body.style.backgroundColor = '#0f1d2e';
+    document.body.classList.add('entered');
     document.body.style.cursor = 'default';
     document.getElementById('stack').classList.add('show');
     playNext();
@@ -112,12 +116,12 @@ function startTimer() {
 document.getElementById('prev').addEventListener('click', playPrev);
 document.getElementById('next').addEventListener('click', playNext);
 document.getElementById('toggle').addEventListener('click', () => {
-    if (!audio) return;
-    if (audio.paused) {
-        audio.play();
+    if (!video.src) return;
+    if (video.paused) {
+        video.play();
         setPauseIcon(false);
     } else {
-        audio.pause();
+        video.pause();
         setPauseIcon(true);
     }
 });
